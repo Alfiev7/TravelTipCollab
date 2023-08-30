@@ -9,57 +9,47 @@ export const mapService = {
 }
 
 // Var that is used throughout this Module (not global)
-var gMap
-var myLatlng
-const API_KEY = 'AIzaSyBPkUDvQ4IYXXF1kBUnAmuUI_ph0dLoGiQ' //DONE: Enter your API Key
+let gMap
+let gLatlng
+const API_KEY = 'AIzaSyBPkUDvQ4IYXXF1kBUnAmuUI_ph0dLoGiQ'
 
 function initMap() {
   const urlParams = new URLSearchParams(window.location.search)
   const lat = parseFloat(urlParams.get('lat')) || 32.0749831
   const lng = parseFloat(urlParams.get('lng')) || 34.9120554
-  console.log('InitMap')
+
   return _connectGoogleApi().then(() => {
-    console.log('google available')
     gMap = new google.maps.Map(document.querySelector('#map'), {
       center: { lat, lng },
       zoom: 15,
     })
-    console.log('Map!', gMap)
 
     let infoWindow = new google.maps.InfoWindow({
-      content: 'Click the map to get Lat/Lng!',
-      position: myLatlng,
+      content: '',
+      position: gLatlng,
     })
 
     infoWindow.open(gMap)
-    // Configure the click listener.
-    gMap.addListener('click', mapsMouseEvent => {
-      // Close the current InfoWindow.
+    gMap.addListener('click', ({ latLng }) => {
       infoWindow.close()
-      // Create a new InfoWindow.
       infoWindow = new google.maps.InfoWindow({
-        position: mapsMouseEvent.latLng,
+        position: latLng,
       })
-      infoWindow.setContent(
-        JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-      )
+      infoWindow.setContent(JSON.stringify(latLng.toJSON(), null, 2))
       infoWindow.open(gMap)
-      ;(myLatlng = mapsMouseEvent.latLng.toJSON()), null, 2
+      gLatlng = latLng
     })
   })
 }
 
 function getLatLng() {
-  if (!myLatlng) {
-    return { lat: 32.0749831, lng: 34.91 }
-  } else {
-    return myLatlng
-  }
+  if (!gLatlng) return { lat: 32.0749831, lng: 34.91 }
+  else return gLatlng
 }
 
-function addMarker(loc) {
-  var marker = new google.maps.Marker({
-    position: loc,
+function addMarker(coords) {
+  let marker = new google.maps.Marker({
+    position: coords,
     map: gMap,
     title: 'Hello World!',
     icon: '../../styles/img/pin.png',
@@ -68,8 +58,8 @@ function addMarker(loc) {
 }
 
 function panTo(lat, lng) {
-  var laLatLng = new google.maps.LatLng(lat, lng)
-  gMap.panTo(laLatLng)
+  const latLng = new google.maps.LatLng(lat, lng)
+  gMap.panTo(latLng)
 }
 
 function _connectGoogleApi() {
@@ -96,5 +86,5 @@ function getGeocode(addressName) {
 }
 
 function getCurrentLatLngForURL() {
-  return myLatlng
+  return gLatlng
 }
