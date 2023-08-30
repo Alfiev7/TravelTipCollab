@@ -10,7 +10,7 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onDeleteLoc = onDeleteLoc
 window.onGoToLoc = onGoToLoc
-window.onCopyCurrentLocation = onCopyCurrentLocation;
+window.onCopyCurrentLocation = onCopyCurrentLocation
 
 function onInit() {
   mapService
@@ -44,13 +44,14 @@ function onGetWeather(lat = 32.0749831, lng = 34.9120554) {
 
 function onGetLocation({ value }) {
   mapService.getGeocode(value).then(res => {
-    console.log('res', res)
+    const { lat, lng } = res
     mapService.panTo(res)
     mapService.addMarker(res)
-    locService.addLoc(value, res.lat, res.lng)
+    locService.addLoc(value, lat, lng)
     locService.getLocs().then(locs => {
       renderTable(locs)
-      onGetWeather(res.lat, res.lng)
+      onGetWeather(lat, lng)
+      renderCurrLocationName(lat, lng)
     })
   })
 }
@@ -100,10 +101,10 @@ function renderCurrLocationName(lat, lng) {
     .then(res => (document.querySelector('.user-pos').innerText = res))
 }
 
-function onPanTo() {
-  console.log('Panning the Map')
-  mapService.panTo(35.6895, 139.6917)
-}
+// function onPanTo() {
+//   console.log('Panning the Map')
+//   mapService.panTo(35.6895, 139.6917)
+// }
 
 function onGoToLoc(event) {
   const lat = +event.target.dataset.lat
@@ -163,26 +164,19 @@ function renderTable(locations) {
 }
 
 function onCopyCurrentLocation() {
-    console.log("onCopyCurrentLocation function called");
-    console.log('Copying current location');
-    const latlng = mapService.getCurrentLatLngForURL();
-    console.log('Current LatLng:', latlng);
-    
-    const link = `https://alfiev7.github.io/TravelTipCollab/?lat=${latlng.lat}&lng=${latlng.lng}`;
-  
-    navigator.clipboard.writeText(link).then(() => {
-      alert('Location link copied to clipboard');
-    }).catch(err => {
-      console.error('Could not copy link', err);
-    });
-  }
-  
-    
-    
-    
-    
-    
-    
+  console.log('onCopyCurrentLocation function called')
+  console.log('Copying current location')
+  const latlng = mapService.getCurrentLatLngForURL()
+  console.log('Current LatLng:', latlng)
 
+  const link = `https://alfiev7.github.io/TravelTipCollab/?lat=${latlng.lat}&lng=${latlng.lng}`
 
-    
+  navigator.clipboard
+    .writeText(link)
+    .then(() => {
+      alert('Location link copied to clipboard')
+    })
+    .catch(err => {
+      console.error('Could not copy link', err)
+    })
+}
