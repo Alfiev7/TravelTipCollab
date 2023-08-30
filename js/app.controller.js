@@ -83,6 +83,7 @@ function onGetUserPos() {
       mapService.panTo(lat, lng)
       renderCurrLocationName(lat, lng)
       onGetWeather(lat, lng)
+      mapService.setLatLng(lat, lng)
     })
     .catch(err => {
       console.log('Error:', err)

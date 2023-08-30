@@ -6,6 +6,7 @@ export const mapService = {
   getReverseGeocode,
   getGeocode,
   getCurrentLatLngForURL,
+  setLatLng,
 }
 
 // Var that is used throughout this Module (not global)
@@ -45,6 +46,10 @@ function initMap() {
 function getLatLng() {
   if (!gLatlng) return { lat: 32.0749831, lng: 34.91 }
   else return gLatlng
+}
+
+function setLatLng(lat, lng) {
+  gLatlng = { lat, lng }
 }
 
 function addMarker(coords) {
