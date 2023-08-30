@@ -168,7 +168,7 @@ function onCopyCurrentLocation() {
     const latlng = mapService.getCurrentLatLngForURL();
     console.log('Current LatLng:', latlng);
     
-    const link = `http://www.yarinkeren.com/travelTip/?lat=${latlng.lat}&lng=${latlng.lng}`;
+    const link = `https://alfiev7.github.io/TravelTipCollab/?lat=${latlng.lat}&lng=${latlng.lng}`;
   
     navigator.clipboard.writeText(link).then(() => {
       alert('Location link copied to clipboard');
