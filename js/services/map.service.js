@@ -37,7 +37,7 @@ function initMap() {
       })
       infoWindow.setContent(JSON.stringify(latLng.toJSON(), null, 2))
       infoWindow.open(gMap)
-      gLatlng = latLng
+      gLatlng = latLng.toJSON()
     })
   })
 }
