@@ -113,7 +113,7 @@ function onGoToLoc(event) {
 }
 
 function onDeleteLoc(event) {
-  const locId = +event.target.dataset.id
+  const locId = event.target.dataset.id
   locService.deleteLoc(locId)
   locService.getLocs().then(locs => {
     renderTable(locs)
