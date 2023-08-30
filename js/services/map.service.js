@@ -9,10 +9,9 @@ export const mapService = {
   setLatLng,
 }
 
-// Var that is used throughout this Module (not global)
 let gMap
 let gLatlng
-const API_KEY = 'AIzaSyBPkUDvQ4IYXXF1kBUnAmuUI_ph0dLoGiQ'
+const API_KEY = ''
 
 function initMap() {
   const urlParams = new URLSearchParams(window.location.search)
