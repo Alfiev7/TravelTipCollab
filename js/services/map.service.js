@@ -5,7 +5,7 @@ export const mapService = {
   getLatLng,
   getReverseGeocode,
   getGeocode,
-  getCurrentLatLngForURL
+  getCurrentLatLngForURL,
 }
 
 // Var that is used throughout this Module (not global)
@@ -14,9 +14,9 @@ var myLatlng
 const API_KEY = 'AIzaSyBPkUDvQ4IYXXF1kBUnAmuUI_ph0dLoGiQ' //DONE: Enter your API Key
 
 function initMap() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const lat = parseFloat(urlParams.get('lat')) || 32.0749831;
-  const lng = parseFloat(urlParams.get('lng')) || 34.9120554;
+  const urlParams = new URLSearchParams(window.location.search)
+  const lat = parseFloat(urlParams.get('lat')) || 32.0749831
+  const lng = parseFloat(urlParams.get('lng')) || 34.9120554
   console.log('InitMap')
   return _connectGoogleApi().then(() => {
     console.log('google available')
@@ -50,19 +50,19 @@ function initMap() {
 }
 
 function getLatLng() {
-  if(!myLatlng){
-    return {lat: 32.0749831, lng: 34.91}
+  if (!myLatlng) {
+    return { lat: 32.0749831, lng: 34.91 }
   } else {
     return myLatlng
   }
 }
-
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({
     position: loc,
     map: gMap,
     title: 'Hello World!',
+    icon: '../../styles/img/pin.png',
   })
   return marker
 }
@@ -96,5 +96,5 @@ function getGeocode(addressName) {
 }
 
 function getCurrentLatLngForURL() {
-  return myLatlng;
+  return myLatlng
 }
