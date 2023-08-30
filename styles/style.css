@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(38, 38, 38);
+
+  font-family: 'Poppins', sans-serif;
+  color: aliceblue;
+}
+
+.main-content {
+  margin: 10vh 20px;
+  padding: 10px;
+  background-color: rgb(90, 90, 90);
+  border-radius: 0.5em;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-inline-start: 20px;
+  margin-inline-end: 20px;
+}
+
+header > *:not(.logo) {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+header input {
+  height: 3em;
+  border-radius: 0.3em;
+}
+
+header button {
+  height: 3em;
+  border-radius: 0.3em;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.main-header {
+  grid-column: 1/-1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-inline-start: 20px;
+  margin-inline-end: 20px;
+}
+
+.main-body {
+  grid-column: 2;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border-radius: 0.8em;
+  place-self: center;
+  width: 75%;
+}
+
+.main-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  grid-column: 1;
+  grid-row: 2;
+}
