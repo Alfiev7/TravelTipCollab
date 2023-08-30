@@ -50,8 +50,13 @@ function initMap() {
 }
 
 function getLatLng() {
-  return myLatlng
+  if(!myLatlng){
+    return {lat: 32.0749831, lng: 34.91}
+  } else {
+    return myLatlng
+  }
 }
+
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({

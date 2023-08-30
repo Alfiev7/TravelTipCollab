@@ -165,7 +165,7 @@ function renderTable(locations) {
 function onCopyCurrentLocation() {
     console.log("onCopyCurrentLocation function called");
     console.log('Copying current location');
-    const latlng = mapService.getCurrentLatLngForURL();
+    const latlng = mapService.getLatLng();
     console.log('Current LatLng:', latlng);
     
     const link = `https://alfiev7.github.io/TravelTipCollab/?lat=${latlng.lat}&lng=${latlng.lng}`;
